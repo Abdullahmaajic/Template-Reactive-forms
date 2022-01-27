@@ -1,0 +1,139 @@
+<div class="container">
+  <h1>Reactive driven form</h1>
+  <div class="card mt-5 mb-5" style="width: 800px; margin: 0 auto;">
+    <form class="form-group p-2" [formGroup]="LoginForm">
+      <div class="row">
+        <!-- first name -->
+        <div class="col-6">
+          <label class="form-label" for="Fname">First name</label>
+          <span class="text text-danger" *ngIf="LoginForm.get('fname')?.invalid">*</span>
+          <input type="text" class="form-control" required name="fname" placeholder="First name" formControlName="fname"
+            autocomplete="off" minlength="4">
+            <div *ngIf="LoginForm.get('fname')?.invalid && LoginForm.get('fname')?.touched">
+              <div class=" text text-danger" *ngIf="LoginForm.get('fname')?.errors?.['required']">Name is required</div>
+              <div class=" text text-danger" *ngIf="LoginForm.get('fname')?.errors?.['minlength']">Should be more than 4 char
+              </div>
+            </div>
+            <div *ngIf="LoginForm.get('fname')?.valid">
+              <div class="text text-success" *ngIf="LoginForm.get('fname')?.valid">Success... </div>
+            </div>
+        </div>
+        <!-- last name -->
+        <div class="col-6">
+          <label class="form-label" for="Lname">Last name</label>
+          <span class="text text-danger" *ngIf="LoginForm.get('lname')?.invalid">*</span>
+          <input type="text" class="form-control" required formControlName="lname" name="lname" placeholder="Last name"
+            autocomplete="off" minlength="4">
+            <div *ngIf="LoginForm.get('lname')?.invalid && LoginForm.get('lname')?.touched">
+              <div class=" text text-danger" *ngIf="LoginForm.get('lname')?.errors?.['required']">Name is required</div>
+              <div class=" text text-danger" *ngIf="LoginForm.get('lname')?.errors?.['minlength']">Should be more than 4 char
+              </div>
+            </div>
+            <div *ngIf="LoginForm.get('lname')?.valid">
+              <div class="text text-success" *ngIf="LoginForm.get('lname')?.valid">Success... </div>
+            </div>
+        </div>
+        <!-- email -->
+        <div class="col-6">
+          <label for="email" class="form-label">Email</label>
+          <span class="text text-danger" *ngIf="LoginForm.get('email')?.invalid">*</span>
+          <div>
+            <input type="text" class="form-control" formControlName="email" id="" name="email" required
+              autocomplete="off" placeholder="Enter Email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <div *ngIf="LoginForm.get('email')?.invalid && LoginForm.get('email')?.touched">
+              <div class=" text text-danger" *ngIf="LoginForm.get('email')?.errors?.['required']">Email is required</div>
+              <div class=" text text-danger" *ngIf="LoginForm.get('email')?.errors?.['pattern']">Type in valid Email
+              </div>
+            </div>
+            <div *ngIf="LoginForm.get('email')?.valid">
+              <div class="text text-success" *ngIf="LoginForm.get('email')?.valid">Success... </div>
+            </div>
+          </div>
+        </div>
+        <!-- password -->
+        <div class="col-6">
+          <div class="form-group">
+            <label for="pwd" class="form-label">Password:</label>
+            <span class="text text-danger" *ngIf="LoginForm.get('pswd')?.invalid">*</span>
+            <input type="password" required class="form-control" formControlName="pswd" placeholder="Enter password"
+              name="pswd" minlength="8" autocomplete="off">
+            <div *ngIf="LoginForm.get('pswd')?.invalid && LoginForm.get('pswd')?.touched">
+              <div class=" text text-danger" *ngIf="LoginForm.get('pswd')?.errors?.['required']">Password is required</div>
+              <div class=" text text-danger" *ngIf="LoginForm.get('pswd')?.errors?.['minlength']">Password must be at least 6 characters
+              </div>
+            </div>
+            <div *ngIf="LoginForm.get('pswd')?.valid">
+              <div class="text text-success" *ngIf="LoginForm.get('pswd')?.valid">Success... </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <!-- phone -->
+        <div class="col-3">
+          <label class="form-label" for="Phone">Phone</label>
+          <span class="text text-danger" *ngIf="LoginForm.get('phone')?.untouched && LoginForm.get('phone')?.invalid">*</span>
+          <input type="text" class="form-control"  formControlName="phone" required name="phone"
+            placeholder="Phone number" autocomplete="off" minlength="10" maxlength="10">
+          <span class="text text-danger" *ngIf="LoginForm.get('phone')?.touched && LoginForm.get('phone')?.invalid">Phone number is Requried </span>
+          <span class="text text-success" *ngIf="LoginForm.get('phone')?.touched && LoginForm.get('phone')?.valid">Success... </span>
+        </div>
+        <!-- city -->
+        <div class="col-3">
+          <label class="form-label">City</label>
+          <span class="text text-danger" *ngIf="LoginForm.get('city')?.untouched && LoginForm.get('city')?.invalid">*</span>
+          <input type="text" class="form-control" formControlName="city" name="city" required autocomplete="off" placeholder="City">
+          <span class="text text-danger" *ngIf="LoginForm.get('city')?.touched && LoginForm.get('city')?.invalid">City required</span>
+          <span class="text text-success" *ngIf="LoginForm.get('city')?.touched && LoginForm.get('city')?.valid">Success... </span>
+        </div>
+        <!-- state -->
+        <div class="col-3">
+          <label class="form-label">State</label>
+          <span class="text text-danger" *ngIf="LoginForm.get('select')?.untouched && LoginForm.get('select')?.invalid">*</span>
+          <select class="form-select" formControlName="select" required name="select">
+            <option selected value="">Choose...</option>
+            <option>Tamil Nadu</option>
+            <option>Kerala</option>
+            <option>Karnataka</option>
+            <option>Andra Pradesh</option>
+            <option>Maharastra</option>
+            <option>Goa</option>
+            <option>Arunachal Pradesh</option>
+            <option>Delhi</option>
+          </select>
+          <span class="text text-danger" *ngIf="LoginForm.get('select')?.touched && LoginForm.get('select')?.invalid">Select State </span>
+          <span class="text text-success" *ngIf="LoginForm.get('select')?.touched && LoginForm.get('select')?.valid">Success... </span>
+        </div>
+        <!-- zipcode -->
+        <div class="col-3">
+          <label for="validationTooltip05" class="form-label">Zip</label>
+          <span class="text text-danger" *ngIf="LoginForm.get('zipcode')?.untouched && LoginForm.get('zipcode')?.invalid">*</span>
+          <input type="text" class="form-control" formControlName="zipcode" name="zipcode"
+            required minlength="6" maxlength="6" pattern="[0-9]+{2,4}">
+          <span class="text text-danger" *ngIf="LoginForm.get('zipcode')?.touched && LoginForm.get('zipcode')?.invalid">Zipcode required</span>
+          <span class="text text-danger" *ngIf="LoginForm.get('zipcode')?.errors?.['pattern'] && LoginForm.get('zipcode')?.invalid">Zipcode required</span>
+          <span class="text text-success" *ngIf="LoginForm.get('zipcode')?.touched && LoginForm.get('zipcode')?.valid">Success... </span>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <!-- form check -->
+        <div class="form-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="check" formControlName="check" name="check"  value=""
+              required>
+            <label class="form-check-label" for="check">
+              Agree to terms and conditions
+            </label>
+            <div class="text-danger" *ngIf="LoginForm.get('check')?.touched && LoginForm.get('check')?.invalid">
+              You must agree before submitting.
+            </div>
+          </div>
+        </div>
+        <!-- button -->
+        <div class="col-12 mt-3">
+          <button class="btn btn-primary" type="submit">Submit form</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
